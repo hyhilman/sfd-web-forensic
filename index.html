@@ -12,13 +12,35 @@
   </style>
 </head>
 <body class="container-fluid">
+
+  <!-- Modal -->
+  <div class="modal fade container" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">list ip terindikasi bot</h5>
+        </div>
+        <div class="modal-body" id="modal-iplist">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <h1 class="col-xs-12 text-center">Hello, world! Copyright @ hyhilman </h1>
   </div>
   <div class="col-xs-12">
     <div class="p-3">
       <button type="button" onclick="setFilter()" class="btn" id="btn-filter">Filter</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        Bruteforce/DoS/DirectoryScan
+      </button>
     </div>
+
     <table id="datatables" class="table table-hover cell-border display nowrap" cellspacing="0" width="100%">
       <thead>
         <tr>
@@ -83,7 +105,20 @@
         "targets" : [0]
       }]
     }).on( 'draw', function(){
-      $("td").markRegExp(/(%20)|(%00)|(\|)|(\!)|(%7C)|(%21)|(%3E)|(>)|(<)|(%3C)|(<\?)|(')|(%27)|(\.\.)/g);
+      $("td").markRegExp(/(<\?)|(')|(`)|(\|)|(\!)|(>)|(<)|(\.\.)|(%20)|(%60)|(%2E)|(%00)|(%7C)|(%21)|(%3E)|(%3C)|(%27)|(.log)|(logs)/g);
+    });
+
+    $.getJSON( 'data_ip_bot.json', function( data ) {
+
+      var items = [];
+      $.each( data.hosts, function( i, val ) {
+        items.push( "<li>" + "<a href='#' onclick=setIp('"+ val.host +"')>" + val.host  +"</a>" + "</li>" );
+      });
+
+      $( "<ul/>", {
+        "id": "iplist",
+        html: items.join( "" )
+      }).appendTo( "#modal-iplist" );
     });
 
     filter = true;
