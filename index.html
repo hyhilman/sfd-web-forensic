@@ -14,7 +14,7 @@
 <body class="container-fluid">
 
   <!-- Modal -->
-  <div class="modal fade container" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -105,7 +105,7 @@
         "targets" : [0]
       }]
     }).on( 'draw', function(){
-      $("td").markRegExp(/(<\?)|(')|(`)|(\|)|(\!)|(>)|(<)|(\.\.)|(%20)|(%60)|(%2E)|(%00)|(%7C)|(%21)|(%3E)|(%3C)|(%27)|(.log)|(logs)/g);
+      $("td").markRegExp(/(\<\?)|(')|(`)|(\|)|(\!)|(\>)|(\<)|(\{)|(\})|(\.\.)|(%20)|(%60)|(%2E)|(%00)|(%7C)|(%21)|(%3E)|(%3C)|(%27)|(%3d)|(%3f)|(\/logs\/)|(.log)|(md5)/g);
     });
 
     $.getJSON( 'data_ip_bot.json', function( data ) {
