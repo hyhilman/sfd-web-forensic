@@ -26,37 +26,7 @@ class Api_Model extends CI_Model {
 	public function get($filter = null) {
 
     $sql =  'SELECT remote_host, time_stamp, request_method, request_protocol, request_uri, status, bytes, referer, site FROM access_log_web_forensic
-WHERE  (
-  request_uri LIKE "%..%"
-  OR request_uri LIKE "%|%"
-  OR request_uri LIKE "%!%"
-  OR request_uri LIKE "%<%"
-  OR request_uri LIKE "%>%"
-  OR request_uri LIKE "%}%"
-  OR request_uri LIKE "%{%"
-  OR request_uri LIKE "%<?%"
-  OR request_uri LIKE "%\'%"
-  OR request_uri LIKE "%\`%"
-  OR request_uri LIKE "%\%00%"
-  OR request_uri LIKE "%\%20%"
-  OR request_uri LIKE "%\%21%"
-  OR request_uri LIKE "%\%27%"
-  OR request_uri LIKE "%\%2E%"
-  OR request_uri LIKE "%\%3C%"
-  OR request_uri LIKE "%\%3D%"
-  OR request_uri LIKE "%\%3E%"
-  OR request_uri LIKE "%\%3F%"
-  OR request_uri LIKE "%\%7B%"
-  OR request_uri LIKE "%\%7C%"
-  OR request_uri LIKE "%\%7D%"
-  OR request_uri LIKE "%\%60%"
-  OR request_uri LIKE "%/logs/%"
-  OR request_uri LIKE "%.log"
-  OR request_uri LIKE "%login%"
-  OR request_uri LIKE "%print%"
-  OR request_uri LIKE "%md5(%)%"
-)
-AND  ( remote_host = 0 OR ( FALSE OR 0 = 0 ) )';
+WHERE  '.filter.'( remote_host = '$this->remote_host.' OR ( FALSE OR 0 = 0 ) )';
 
     $query = $this->db->query($sql);
 
